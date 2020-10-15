@@ -1,0 +1,55 @@
+<div>
+    <mat-toolbar color="secondary">
+        <span>Todo App</span>
+    </mat-toolbar>
+    <div>
+        <form>
+            <div class="todo_input">
+                <div class="todo_title">
+                    <p>Enter Title:</p>
+                    <input [(ngModel)]="title" placeholder="Add Title" name="title">
+                </div>
+                <div class="todo_description">
+                    <p>Enter Description:</p>
+                    <input [(ngModel)]="description" placeholder="Add Description" name="description">
+                </div>
+                <div class="todo_date">
+                    <p>Enter Date:</p>
+                    <input type="date" [(ngModel)]="item_date" name="item_date">
+                </div>
+                <button type="submit" *ngIf="title!=='' && description!==''" (click)="addItem($event)">Add Todo</button>
+            </div>
+        </form>
+    </div>
+    <ul>
+        <li *ngFor="let todo of todoList; let i=index">
+            <mat-card>
+                <app-todo-list [title]="todo.title"></app-todo-list>
+                <mat-card-subtitle><strong>Details</strong></mat-card-subtitle>
+                <mat-card-content>
+                    <table class="todo-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{todo.id}}</td>
+                                <td>{{todo.title}}</td>
+                                <td>{{todo.description}}</td>
+                                <td>{{todo.item_date|date:'yyyy-MMM-dd'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </mat-card-content>
+                <button mat-mini-fab color="white" aria-label="delete icon" (click)="deleteItem(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-card>
+        </li>
+    </ul>
+</div>
